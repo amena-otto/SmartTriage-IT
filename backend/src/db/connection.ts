@@ -1,0 +1,11 @@
+import Database from 'better-sqlite3';
+import path from 'node:path';
+import fs from 'node:fs';
+const repoRoot = path.resolve(__dirname, '../../..');
+const finalPath = process.env.DB_FILE ? path.resolve(process.env.DB_FILE) : path.join(repoRoot, 'data', 'smarttriage.db');
+fs.mkdirSync(path.dirname(finalPath), { recursive:true });
+export const db = new Database(finalPath);
+db.pragma('foreign_keys = ON');
+db.pragma('journal_mode = WAL');
+db.pragma('busy_timeout = 5000');
+export const DATABASE_PATH = finalPath;
