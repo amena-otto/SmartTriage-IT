@@ -1,0 +1,27 @@
+{
+  "name": "smarttriage-it",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "dev": "concurrently -k \"npm run dev -w backend\" \"npm run dev -w frontend\"",
+    "build": "npm run build -w backend && npm run build -w frontend",
+    "test": "npm run test -w backend",
+    "db:init": "npm run db:init -w backend",
+    "db:seed": "npm run db:seed -w backend",
+    "check": "npm run build && npm run test"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "typescript": "^5.8.3"
+  },
+  "allowScripts": {
+    "better-sqlite3@11.10.0": true,
+    "sqlite3@5.1.7": true,
+    "esbuild@0.28.2": true,
+    "esbuild@0.25.12": true
+  }
+}
